@@ -1,27 +1,52 @@
 import { Request, Response } from 'express'
 
+import GetGiphyByTitleRecipeService from '../services/GetGiphyByTitleRecipeService'
 import GetRecipesByIngredients from '../services/GetRecipesByIngredientsService'
+
+interface IRecipeWithGiphy {
+  title: string,
+  ingredients: string[],
+  link: string,
+  gif: string
+}
 
 class RecipeController {
   public async index (req: Request, res: Response) {
-    const { i } = req.query
+    const { i: ingredients } = req.query
 
-    const ingredients = String(i)
+    const parsedIngredients = String(ingredients)
       .split(',')
       .map(ingredient => ingredient.trim())
 
-    if (ingredients.length > 3) {
+    if (parsedIngredients.length > 3) {
       return res.status(400).json({ error: 'It\'s permitted up to 3 ingredients!' })
     }
 
-    const getRecipesByIngredients = new GetRecipesByIngredients()
-
     try {
-      const recipes = await getRecipesByIngredients.run(ingredients)
+      const getRecipesByIngredients = new GetRecipesByIngredients()
+
+      const recipes = await getRecipesByIngredients.run(parsedIngredients)
+
+      const getGiphyByTitleRecipeService = new GetGiphyByTitleRecipeService()
+
+      const recipesWithGiphy: IRecipeWithGiphy[] = []
+
+      for (const recipe of recipes) {
+        const giphy = await getGiphyByTitleRecipeService.run(recipe.title)
+
+        recipesWithGiphy.push({
+          title: recipe.title,
+          ingredients: recipe.ingredients
+            .split(',')
+            .map(ingredient => ingredient.trim()),
+          link: recipe.href,
+          gif: giphy
+        })
+      }
 
       return res.json({
-        keywords: ingredients,
-        recipes
+        keywords: parsedIngredients,
+        recipes: recipesWithGiphy
       })
     } catch (err) {
       // throw new Error('Service currently unavailable!')
