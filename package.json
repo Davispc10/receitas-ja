@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
-    "test": "NODE_ENV=test jest --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "axios": "^0.19.2",
