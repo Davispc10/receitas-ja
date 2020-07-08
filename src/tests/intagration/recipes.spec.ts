@@ -19,8 +19,8 @@ describe('Recipe', () => {
               'tomato',
               'hot sauce'
             ],
-            link: 'http://www.nibbledish.com/people/Endymion/recipes/hash-and-eggs',
-            gif: 'https://media0.giphy.com/media/qJkRbWM1MfVjq/giphy.gif?cid=283e22982b66eda1a0dbd7f7d7faa6c15e0e8ff02bf640c1&rid=giphy.gif'
+            link: 'http://www.nibbledish.com/people/Endymion/recipes/hash-and-eggs'
+            // gif: 'https://media0.giphy.com/media/qJkRbWM1MfVjq/giphy.gif?cid=283e22982b66eda1a0dbd7f7d7faa6c15e0e8ff02bf640c1&rid=giphy.gif'
           })
         ])
       })
