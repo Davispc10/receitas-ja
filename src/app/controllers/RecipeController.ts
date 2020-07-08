@@ -38,7 +38,8 @@ class RecipeController {
           title: recipe.title,
           ingredients: recipe.ingredients
             .split(',')
-            .map(ingredient => ingredient.trim()),
+            .map(ingredient => ingredient.trim())
+            .sort(),
           link: recipe.href,
           gif: giphy
         })
