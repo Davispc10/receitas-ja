@@ -1,4 +1,4 @@
-import recipePuppyApi from './recipePuppyApi'
+import { recipeApi } from './api'
 
 interface IRecipe {
   title: string,
@@ -9,7 +9,7 @@ interface IRecipe {
 
 class GetRecipesByIngredientsService {
   public async run (ingredients: string[]): Promise<IRecipe[]> {
-    const response = await recipePuppyApi.get('', {
+    const response = await recipeApi.get('', {
       params: {
         i: ingredients.join(',')
       }

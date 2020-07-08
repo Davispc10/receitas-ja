@@ -21,7 +21,6 @@ class RecipeController {
     if (parsedIngredients.length > 3) {
       return res.status(400).json({ error: 'It\'s permitted up to 3 ingredients!' })
     }
-
     try {
       const getRecipesByIngredients = new GetRecipesByIngredients()
 

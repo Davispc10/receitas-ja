@@ -1,4 +1,4 @@
-import giphyApi from './giphyApi'
+import { giphyApi } from './api'
 
 class GetGiphyByTitleRecipeService {
   public async run (title: string): Promise<string> {
